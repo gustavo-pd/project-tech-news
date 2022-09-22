@@ -1,6 +1,7 @@
 import requests
 import time
 
+
 # Requisito 1
 def fetch(url):
     try:
@@ -11,7 +12,7 @@ def fetch(url):
         time.sleep(1)
         return response.text
 
-    except requests.ReadTimeout:
+    except requests.Timeout:
         return None
 
     except requests.exceptions.HTTPError:
