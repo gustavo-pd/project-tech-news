@@ -1,6 +1,6 @@
 import requests
 import time
-import parsel
+from parsel import Selector
 
 
 # Requisito 1
@@ -22,15 +22,15 @@ def fetch(url):
 
 # Requisito 2
 def scrape_novidades(html_content):
-    parsel_selector = parsel.Selector(text=html_content)
-    find_url_news = parsel_selector.css("a.cs-overlay-link::attr(href)").getall()
-    return find_url_news
+    parsel_selector = Selector(text=html_content)
+    url = parsel_selector.css("a.cs-overlay-link::attr(href)").getall()
+    return url
 
 
 # Requisito 3
 def scrape_next_page_link(html_content):
     next_page = (
-        parsel.Selector(html_content).css("a.next.page-numbers::attr(href)").get()
+        Selector(html_content).css("a.next.page-numbers::attr(href)").get()
     )
     return next_page
 
